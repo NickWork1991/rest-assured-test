@@ -7,6 +7,8 @@ import io.restassured.response.Response;
 public  class APIServices {
     AuthRequest authRequest = new AuthRequest("admin","password123");
     private static final String TOKEN_URL="https://restful-booker.herokuapp.com/auth";
+    private static final String BASE_URL="https://restful-booker.herokuapp.com";
+
     private static final Gson gson= new Gson();
 
     @Step("Method to get token")
@@ -21,5 +23,18 @@ public  class APIServices {
                 .statusCode(200)
                 .extract()
                 .response();
+    }
+    @Step("Method to create new booking")
+     public  Response createBooking (BookingInfo bookingInfo){
+           return RestAssured.given()
+                   .contentType(ContentType.JSON)
+                   .body(gson.toJson(bookingInfo))
+                   .when()
+                   .log().body()
+                   .post(BASE_URL+"/booking")
+                   .then()
+                   .statusCode(200)
+                   .extract()
+                   .response();
     }
 }
