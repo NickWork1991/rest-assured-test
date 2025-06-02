@@ -23,6 +23,17 @@ public class CreateBookingTest {
             .additionalneeds("Breakfast")
             .build();
 
+    BookingInfo invalidBookingInfo= BookingInfo.builder()
+            .firstname("Nik")
+            .lastname("Secoro")
+            .totalprice(155)
+            .depositpaid(true)
+            .bookingdates(BookingInfo.BookingDates.builder()
+                    .checkin("2025-05-07")
+                    .checkout("2025-05-11")
+                    .build())
+            .build();
+
     @BeforeMethod
     void beforeCreate(){
         APIServices apiServices = new APIServices();
@@ -34,12 +45,32 @@ public class CreateBookingTest {
     @Severity(SeverityLevel.CRITICAL)
     public void createBookingWithAllFieldsTest(){
         logger.info("Scenario #1: Verify that can create booking with valid data");
-        Allure.step("Create a new booking with all required fields" + bookingInfo);
+        Allure.step("Create a new booking with all required fields");
 
         APIServices apiServices = new APIServices();
         Response response = apiServices.createBooking(bookingInfo);
 
         Allure.step("Verify that status code is 200");
         Assert.assertEquals(response.statusCode(),200,"Expected status code - 200");
+
+        String actualFirstName = response.jsonPath().getString("booking.firstname");
+        Allure.step("Verify that responseBody  contains firstname - 'Nik'");
+        Assert.assertEquals(actualFirstName,"Nik","Firstname doesn't match in response");
     }
+
+
+    @Test
+    @Story("Try to create a new booking without required field")
+    @Severity(SeverityLevel.CRITICAL)
+    public void createBookingWithoutRequiredFieldTest(){
+        logger.info("Scenario#3: Verify that can not create booking without required field - 'depositPaid'");
+        Allure.step("Create a new booking without required field");
+
+        APIServices apiServices = new APIServices();
+        Response response = apiServices.createBooking(invalidBookingInfo);
+
+        Allure.step("Verify that expected status is 400");
+        Assert.assertEquals(response.statusCode(),400, "Expected status code -400");
+    }
+
 }
