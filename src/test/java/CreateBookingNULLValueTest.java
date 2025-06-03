@@ -42,7 +42,7 @@ public class CreateBookingNULLValueTest {
     }
 
     @DataProvider(name = "invalidValue")
-    //Аннотация TestNG, указывающая, что тест будет выполняться
+    //Аннотация TestNG, указывающая, что тест будет выполняться +
     // многократно с разными входными значениями из DataProvider-а missingRequiredFields.
     public Object[][] requiredFields() {
         return new Object[][] {
