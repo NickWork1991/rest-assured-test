@@ -63,7 +63,7 @@ public class CreateBookingTest {
     @Story("Try to create a new booking without required field")
     @Severity(SeverityLevel.CRITICAL)
     public void createBookingWithoutRequiredFieldTest(){
-        logger.info("Scenario#3: Verify that can not create booking without required field - 'depositPaid'");
+        logger.info("Scenario#3: Verify that can not create booking without required field - 'additionalNeeds'");
         Allure.step("Create a new booking without required field");
 
         APIServices apiServices = new APIServices();

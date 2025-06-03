@@ -42,7 +42,7 @@ public class CreateInvalidBookingParamTest {
         Allure.step("Remove particular field : " + fieldToRemove);
         Allure.step("Response : " + response.asString());
 
-        Assert.assertTrue(response.statusCode()>=400, "Expected status code 400/ 500 when missing" + fieldToRemove);
+        Assert.assertTrue(response.statusCode()>=400, "Expected status code 400/ 500 when missing" + "+" + fieldToRemove);
     }
     @DataProvider(name = "missingRequiredFields")
     //Аннотация TestNG, указывающая, что тест будет выполняться

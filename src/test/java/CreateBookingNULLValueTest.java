@@ -23,9 +23,9 @@ public class CreateBookingNULLValueTest {
         apiServices.getToken();
     }
 
-    @Test(dataProvider = "invalidValues")
+    @Test(dataProvider = "invalidValue")
     @Story("Try to crete new booking with 'NULL' value in the required fields")
-    @Severity(SeverityLevel.CRITICAL.CRITICAL)
+    @Severity(SeverityLevel.CRITICAL)
     void createBookingWithInvalidValueTest(String field,Object valueNull){
         logger.info("Create booking with value=NULL in required field : " +field + "+" + valueNull);
 
@@ -38,7 +38,7 @@ public class CreateBookingNULLValueTest {
         Allure.step("Enter invalid value : " +field + " + " + valueNull);
         Allure.step("Response : " + response.asString());
 
-        Assert.assertTrue(response.statusCode()>=400, "Expected status code 400/ 500 when missing" + valueNull);
+        Assert.assertEquals(response.statusCode(),500, "Expected status code 500 when missing" + valueNull);
     }
 
     @DataProvider(name = "invalidValue")

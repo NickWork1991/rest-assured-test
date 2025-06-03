@@ -1,4 +1,2 @@
 "BROKEN","EPIC","FAILED","FEATURE","PASSED","SKIPPED","STORY","UNKNOWN"
-"0","","1","","5","0","Create param test to check how system works without required fields","0"
-"0","User management","0","Create booking","1","0","Try no create a new booking","0"
-"0","User management","2","Create booking","0","0","Try to create a new booking without required field","0"
+"0","","1","","5","0","Try to crete new booking with 'NULL' value in the required fields","0"

@@ -40,7 +40,7 @@ public  class APIServices {
                    .response();
     }
 
-    @Step("Method to create booking without any required fields")
+    @Step("Method to create booking without or with invalid value in any required fields")
     public Response createInvalidBooking(Map<String, Object> payload){
         return RestAssured.given()
                 .contentType(ContentType.JSON)
