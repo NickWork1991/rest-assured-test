@@ -3,6 +3,7 @@ import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 
 import java.util.Map;
 
@@ -49,5 +50,42 @@ public  class APIServices {
                 .when()
                 .post(BASE_URL+"/booking")
                 .then().extract().response();
+    }
+
+    @Step("Method to get all booking")
+    public Response getAllBooking(){
+        return RestAssured.given()
+                .contentType(ContentType.JSON)
+                .log().all()
+                .when()
+                .get(BASE_URL+"/booking")
+                .then()
+                .log().all()
+                .extract().response();
+    }
+
+    @Step("Method to get booking using specific params")
+    public Response getBookingWithParams(String firstname, String lastname, String checkin, String checkout){
+        RequestSpecification request = RestAssured.given()
+                .log().uri();
+        if (firstname != null && !firstname.isEmpty()) {
+            request.queryParam("firstname", firstname);
+        }
+        if (lastname!=null && !lastname.isEmpty()){
+            request.queryParam("lastname",lastname);
+        }
+        if (checkin!=null && !checkin.isEmpty()){
+            request.queryParam("checkin", checkin);
+        }
+        if (checkout!=null && !checkout.isEmpty()){
+            request.queryParam("checkout", checkout);
+        }
+        return RestAssured.given()
+                .contentType(ContentType.JSON)
+                .when()
+                .get(BASE_URL+"/booking")
+                .then()
+                .log().body()
+                .extract().response();
     }
 }
