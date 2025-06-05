@@ -1,7 +1,4 @@
-import io.qameta.allure.Allure;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,7 +9,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.Map;
-
+@Epic("User management")
+@Feature("Create booking")
 public class CreateInvalidBookingParamTest {
 
     private static final Logger logger = LogManager.getLogger(CreateInvalidBookingParamTest.class);
