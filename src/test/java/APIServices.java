@@ -82,8 +82,21 @@ public  class APIServices {
         }
         return RestAssured.given()
                 .contentType(ContentType.JSON)
+                .log().all()
                 .when()
                 .get(BASE_URL+"/booking")
+                .then()
+                .log().body()
+                .extract().response();
+    }
+
+    @Step("Method to GET booking by Id")
+    Response getBookingById(String id){
+        return RestAssured.given()
+                .contentType(ContentType.JSON)
+                .log().all()
+                .when()
+                .get("https://restful-booker.herokuapp.com/booking/"+id)
                 .then()
                 .log().body()
                 .extract().response();

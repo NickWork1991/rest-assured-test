@@ -32,7 +32,7 @@ public class GetAllBookingTest {
         apiServices.getToken();
     }
 
-   /** @Test
+    @Test
     @Story("Try to get all bookings without filters")
     @Severity(SeverityLevel.NORMAL)
     void getAllBookingWithoutFiltersTest(){
@@ -44,7 +44,7 @@ public class GetAllBookingTest {
 
         Allure.step("Verify that expected status is 200");
         Assert.assertEquals(response.statusCode(), 200, "Expected status - 200");
-    }*/
+    }
 
     @Test
     @Story("Try to get booking with specific filter")
@@ -56,13 +56,30 @@ public class GetAllBookingTest {
         Allure.step("Create a new booking");
         apiServices.createBooking(bookingInfo);
 
-        Response response = apiServices.getBookingWithParams("Nik",null,null,null);
+        Response response = apiServices.getBookingWithParams("Nik","Mekhanik",null,null);
 
         Allure.step("Verify that expected status - 200");
         Assert.assertEquals(response.statusCode(),200, "Expected status - 200");
 
         List<Integer> bookingIds = response.jsonPath().getList("bookingid");
         Assert.assertFalse(bookingIds.isEmpty(), "No bookings found with firstname 'Nik'");
+    }
 
+    @Test
+    @Story("Try to get booking using Id")
+    @Severity(SeverityLevel.NORMAL)
+    void getBookingById(){
+        logger.info("Scenario #3 : GET booking by  valid ID");
+        APIServices apiServices = new APIServices();
+
+        String bookingId= "13";
+        Response response = apiServices.getBookingById(bookingId);
+
+        Allure.step("Verify that when use valid id in th request expected status code - 200");
+        Assert.assertEquals(response.statusCode(),200,"Expected status code - 200");
+
+        Allure.step("Verify that firstname field contains - 'John'");
+        String actualFirstName = response.jsonPath().getString("firstname");
+        Assert.assertEquals(actualFirstName, "John", "The firstName field doesn't contain - 'John'");
     }
 }
