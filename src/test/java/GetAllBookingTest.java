@@ -75,7 +75,7 @@ public class GetAllBookingTest {
         String bookingId= "13";
         Response response = apiServices.getBookingById(bookingId);
 
-        Allure.step("Verify that when use valid id in th request expected status code - 200");
+        Allure.step("Verify that when use valid id in the request expected status code - 200");
         Assert.assertEquals(response.statusCode(),200,"Expected status code - 200");
 
         Allure.step("Verify that firstname field contains - 'John'");
