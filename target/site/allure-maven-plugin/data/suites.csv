@@ -1,2 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","1247","getAllBookingWithoutFiltersTest","Default Suite","Wed Jun 04 14:12:20 MSK 2025","passed","Wed Jun 04 14:12:21 MSK 2025","GetAllBookingTest","rest-assured-test","GetAllBookingTest","getAllBookingWithoutFiltersTest"
