@@ -24,6 +24,7 @@ public  class APIServices {
                 .when()
                 .post(TOKEN_URL)
                 .then()
+                .log().body()
                 .statusCode(200)
                 .extract()
                 .response();
@@ -33,10 +34,11 @@ public  class APIServices {
            return RestAssured.given()
                    .contentType(ContentType.JSON)
                    .body(gson.toJson(bookingInfo))
-                   .when()
                    .log().body()
+                   .when()
                    .post(BASE_URL+"/booking")
                    .then()
+                   .log().body()
                    .extract()
                    .response();
     }
@@ -97,6 +99,21 @@ public  class APIServices {
                 .log().all()
                 .when()
                 .get("https://restful-booker.herokuapp.com/booking/"+id)
+                .then()
+                .log().body()
+                .extract().response();
+    }
+
+    @Step("Method to update created booking")
+    Response updateBooking(String idToUpdate, BookingInfo bookingInfo, String token){
+        return RestAssured.given()
+                .contentType(ContentType.JSON)
+                .accept("application/json")
+                .header("Cookie", "token=" + token)
+                .body(gson.toJson(bookingInfo))
+                .log().all()
+                .when()
+                .put("https://restful-booker.herokuapp.com/booking/"+idToUpdate)
                 .then()
                 .log().body()
                 .extract().response();
